@@ -1,6 +1,17 @@
 # Calculadora de incertidumbres
 
-Proyecto desarrollado por Luis Miguel Pintor Olivares para la clase de mediciones eléctricas.
+Esta calculadora permite determinar las incertidumbres tipo A y tipo B para la materia de mediciones eléctricas en ingeniería eléctrica para facilitar los cálculos en los exámenes parciales, proyectos y prácticas del semestre
 
-![ESIME, #IPN. Escuela Superior de Ingenieria Mecanica y Electrica, Instituto  Politecnico Nacional | Esime, Esime zacatenco, Ingeniería mecánica](https://i.pinimg.com/originals/81/e5/3e/81e53e0b5241325554ab2004a0afce7e.jpg)
+[Calculadora de incertidumbres (competent-newton-410dff.netlify.app)](https://competent-newton-410dff.netlify.app/)
+
+Desarrollado por
+
+* Basurto Sosa José Luis
+* Cortés Rodríguez Nolberto
+* Parra García Axel Valentín
+* Pintor Olivares Luis M
+
+## Captura de pantalla
+
+![captura de pantalla de muestra del programa](ss.jpeg)
 

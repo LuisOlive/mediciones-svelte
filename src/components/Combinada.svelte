@@ -4,17 +4,17 @@
   import contribuciones, { contribucionesExpandidas } from '../lib/core/contribuciones'
   import { suma } from '../lib/core/estadistica'
   import { dump } from '../lib/utils/notacionIngenieria'
-  import img1 from '../assets/1.jpg'
-  import img2 from '../assets/2.jpg'
 
   $: f = $modelo?.evaluate
   // @ts-ignore
   $: f.__parcial = (variable: string) => () => $diff(variable)?.evaluate($mejores)
 
+  export let contribucionesCombinada = [0]
+  export let incertidumbreCombinada = 0
+
   $: sumaContribs = suma(contribuciones(f, $mediciones, $mejores))
-  $: sumaContribs2 = suma(contribucionesExpandidas(f, $mediciones, $mejores))
+  $: contribucionesCombinada = contribucionesExpandidas(f, $mediciones, $mejores)
   $: incertidumbreCombinada = Math.sqrt(sumaContribs)
-  $: gradosEfectivos = incertidumbreCombinada ** 4 / sumaContribs2
 </script>
 
 <h2>Cálculo de incertidumbre combinada</h2>
@@ -43,18 +43,3 @@
   raiz({dump(sumaContribs)}) = <b>{dump(incertidumbreCombinada)}</b>
   <br />
 </div>
-
-<h2>Cálculo de incertidumbre expandida</h2>
-
-<div class="alert alert-warning">
-  <b>Suma de las contribuciones para la expandida:</b>
-  {dump(sumaContribs2)}
-  <br />
-
-  <b>Grados efectivos de libertad</b>
-  {dump(incertidumbreCombinada)}^4 / {dump(sumaContribs2)} = {Math.floor(gradosEfectivos)}
-  <br />
-</div>
-
-<img src={img1} class="img-fluid" alt="" />
-<img src={img2} class="img-fluid" alt="" />

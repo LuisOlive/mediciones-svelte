@@ -1,6 +1,6 @@
 <script lang="ts">
   import { medicionesRepetidas } from '../../lib/core/fuentesIncertidumbre'
-  import Termometro from '../../lib/aparatos/TermometroCA865'
+  import Termometro from '../../../lib/aparatos/TermometroCA865'
   import { dump } from '../../lib/utils/notacionIngenieria'
   import InputMediciones from './InputMediciones.svelte'
   import type { Medicion } from '../../lib/core/tipos'

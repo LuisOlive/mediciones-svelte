@@ -1,34 +1,43 @@
 <script lang="ts">
-  import * as s from '../../lib/core/estadistica'
-  import { load, dump } from '../../lib/utils/notacionIngenieria'
+  import { estadistica as s, notacionIngenieria as ni } from 'mediciones-electricas'
 
-  let _lecturas = ''
+  let value = ''
 
-  export let lecturas: number[] = [0]
+  export let lecturas: number[] = []
   export let mejorEstimacion: number = 0
 
-  $: lecturas = _lecturas.split(/,\s*/).map(load)
+  $: _lecturas = value
+    .split(/,\s*/) // separa por comas
+    .filter(x => x) // quita valores vacíos
+    .map(ni.load) // convierte entradas en notacion de ingenieria a numeros
+
+  // optimizacion para celulares, cuando se mejore se podrán menos de 10
+  $: if (_lecturas.length > 9) {
+    // @ts-ignore
+    lecturas = _lecturas
+  }
+
   $: mejorEstimacion = s.media(lecturas)
 </script>
 
 <label class="form-group m-0 mb-3 d-block">
   lecturas obtenidas (separadas por comas)
-  <textarea class="form-control m-0" bind:value={_lecturas} />
+  <textarea class="form-control m-0" bind:value />
 </label>
 
 <div class="alert alert-success">
   <b>Media aritmética:</b>
-  {dump(mejorEstimacion)} <br />
+  {ni.dump(mejorEstimacion)} <br />
 
   <b>Varianza:</b>
-  {dump(s.varianza(lecturas))} <br />
+  {ni.dump(s.varianza(lecturas))} <br />
 
   <b>Desviacion estandar:</b>
-  {dump(s.desviacionEstandar(lecturas))} <br />
+  {ni.dump(s.desviacionEstandar(lecturas))} <br />
 
   <b>Grados efectivos de libertad:</b>
   {s.gradosLibertad(lecturas)} <br />
 
   <b>Incertidumbre tipo A:</b>
-  {dump(s.incertidumbreA(lecturas))} <br />
+  {ni.dump(s.incertidumbreA(lecturas))} <br />
 </div>
